@@ -165,7 +165,8 @@
   .agree{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mute);cursor:pointer}
   .agree input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--neon)}
   .agree b{color:var(--ink)}
-  .agree span{line-height:1.75}
+  .agree-text span{display:block;line-height:1.6}
+  .agree-text span+span{margin-top:6px}
   #submitBtn{width:100%}
   .msg{font-size:15px;padding:14px 16px;border-radius:var(--r-ctl);display:none}
   .msg.ok{display:block;background:var(--neon-soft);border:1px solid rgba(255,77,157,.45)}
@@ -372,7 +373,7 @@
           <textarea id="fMemo" name="memo" rows="2" maxlength="120" placeholder="예) 친구 1명이랑 따로 신청해요"></textarea>
         </div>
         <label class="agree"><input type="checkbox" name="agree" required>
-          <span>11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어렵다는 점을 확인했어요.<br>신청 내역(이름과 답변)은 이 페이지를 보는 모든 사람에게 <b>공개</b>돼요.<br>휴대폰 번호는 공개되지 않고 카톡방 초대에만 쓰며, 수업이 끝나면 지워요.</span></label>
+          <span class="agree-text"><span>11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어렵다는 점을 확인했어요.</span><span>신청 내역(이름과 답변)은 이 페이지를 보는 모든 사람에게 <b>공개</b>돼요.</span><span>휴대폰 번호는 공개되지 않고 카톡방 초대에만 쓰며, 수업이 끝나면 지워요.</span></span></label>
         <button class="btn-primary" id="submitBtn" type="submit">NEON 클래스 참가 신청</button>
         <div class="msg" id="formMsg" role="status"></div>
       </form>
