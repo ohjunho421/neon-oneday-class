@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14111b">
+<meta name="description" content="A2O LITE - NEON 1절 하이라이트 원데이 클래스. 11/14(토) 20:20 사당역 2분 대형연습실, 강사 유림쌤. 인원이 많을수록 1인 참가비가 내려가요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NEON 원데이 댄스 클래스 | 11/14(토) 사당">
+<meta property="og:description" content="A2O LITE - NEON 하이라이트 80분 클래스. 모일수록 1인 2.5만원까지 내려가요. 11/6(금) 마감!">
+<meta property="og:url" content="https://ohjunho421.github.io/neon-oneday-class/">
+<meta property="og:image" content="https://ohjunho421.github.io/neon-oneday-class/assets/room-main.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>NEON 원데이 클래스 참가자 모집 | 11/14(토) 사당</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preload" as="image" href="assets/room-mirror.jpg">
+<style>
+  /* 밤 연습실 + 네온 핑크 한 색. 표면 14px, 컨트롤 10px 라운드 */
+  :root{
+    --night:#14111b; --night-2:#1c1824; --night-3:#251f30;
+    --line:#2f2a3b; --line-2:#463e56;
+    --ink:#f4f0f8; --mute:#aaa3b9;
+    --neon:#ff4d9d; --neon-ink:#2a0d1b; --neon-soft:rgba(255,77,157,.13);
+    --warn:#ffb86b;
+    --r-surface:14px; --r-ctl:10px;
+    --display:"Big Shoulders Display","Pretendard Variable",sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scrollbar-color:var(--line-2) var(--night)}
+  body{font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--night);color:var(--ink);line-height:1.65;font-size:16px;word-break:keep-all;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+  ::selection{background:var(--neon);color:var(--neon-ink)}
+  input,textarea{caret-color:var(--neon)}
+  a{color:var(--ink);text-underline-offset:3px;text-decoration-color:var(--neon)}
+  :focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:4px}
+  .num{font-family:var(--display);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  section{padding:56px 0 0}
+  h2{font-size:clamp(22px,5.4vw,28px);line-height:1.3;letter-spacing:-.02em;font-weight:800;text-wrap:balance}
+  h2+p,h2+.lead{margin-top:10px}
+  .lead{color:var(--mute);max-width:60ch}
+  .note{color:var(--mute);font-size:14px;margin-top:14px;max-width:62ch}
+  .note b,.lead b{color:var(--ink);font-weight:700}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;min-height:min(88svh,780px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;z-index:-2;filter:brightness(.38) contrast(1.15) saturate(.7)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(20,17,27,.2) 0%,rgba(20,17,27,.55) 45%,var(--night) 100%)}
+  .hero-in{width:100%;max-width:720px;margin:0 auto;padding:0 20px 40px}
+  .hero h1{display:flex;flex-direction:column;gap:14px;font-weight:700}
+  .sign{font-family:var(--display);font-weight:800;font-size:clamp(104px,30vw,184px);line-height:.82;letter-spacing:.03em;color:#ffeaf4;
+    text-shadow:0 0 2px #fff,0 0 10px var(--neon),0 0 26px var(--neon),0 4px 60px rgba(255,77,157,.55)}
+  .h1-sub{font-size:clamp(19px,4.8vw,24px);line-height:1.35;letter-spacing:-.02em;max-width:22ch}
+  .when{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 18px;color:#ddd6e6;font-size:15px}
+  .when span{display:inline-flex;gap:6px;align-items:center}
+  .hero-cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  @media (prefers-reduced-motion:no-preference){
+    .sign{animation:ignite 1.6s .35s both}
+    @keyframes ignite{
+      0%{opacity:.12;text-shadow:none} 8%{opacity:1;text-shadow:0 0 2px #fff,0 0 10px var(--neon),0 0 26px var(--neon)}
+      11%{opacity:.18;text-shadow:none} 22%{opacity:1} 25%{opacity:.35;text-shadow:none}
+      34%,100%{opacity:1;text-shadow:0 0 2px #fff,0 0 10px var(--neon),0 0 26px var(--neon),0 4px 60px rgba(255,77,157,.55)}
+    }
+  }
+
+  /* ===== 버튼 ===== */
+  .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border:0;border-radius:var(--r-ctl);
+    background:var(--neon);color:var(--neon-ink);font:inherit;font-size:17px;font-weight:800;text-decoration:none;cursor:pointer;white-space:nowrap;
+    box-shadow:0 6px 18px -8px rgba(0,0,0,.7);transition:transform .2s var(--ease),box-shadow .2s var(--ease),opacity .2s}
+  .btn-primary:hover{background:#ff6aae}
+  .btn-primary:active{transform:translateY(1px) scale(.99)}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .btn{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 15px;border:1px solid var(--line-2);border-radius:var(--r-ctl);
+    background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:border-color .2s,background .2s}
+  .btn:hover{border-color:var(--neon);background:var(--neon-soft)}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+  /* ===== 공지 ===== */
+  .notice{margin-top:24px;padding:16px 18px;border-radius:var(--r-surface);background:var(--neon-soft);border:1px solid rgba(255,77,157,.45);font-size:15px}
+  .notice[hidden]{display:none}
+
+  /* ===== 현재 모집 상황 ===== */
+  .status{padding-top:8px}
+  .seats{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .seat{width:34px;height:34px;border-radius:50%;border:2px dashed var(--line-2);transition:background .4s var(--ease),border-color .4s,box-shadow .4s}
+  .seat.on{border:2px solid var(--neon);background:var(--neon)}
+  .seat.extra{width:22px;height:22px;align-self:center}
+  .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 36px;margin-top:22px}
+  .facts dt{font-size:13px;color:var(--mute)}
+  .facts dd{font-size:34px;line-height:1.1;font-weight:800}
+  .facts dd.hot{color:var(--neon)}
+  .facts small{font-family:"Pretendard Variable",sans-serif;font-size:15px;font-weight:700;margin-left:2px}
+
+  /* ===== 안내 목록 ===== */
+  .info{margin-top:20px;display:grid;grid-template-columns:76px 1fr;gap:14px 16px;font-size:16px}
+  .info dt{color:var(--mute);font-size:14px;padding-top:2px}
+  .info dd span{color:var(--mute);font-size:14px}
+  .info+.info{margin-top:0}
+
+  /* ===== 영상 ===== */
+  .video{position:relative;margin-top:20px;aspect-ratio:16/9;border-radius:var(--r-surface);overflow:hidden;background:#000}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ===== 가격 사다리 ===== */
+  .next{margin-top:18px;font-size:16px}
+  .next b{color:var(--neon)}
+  .ladder{width:100%;margin-top:18px;border-collapse:separate;border-spacing:0 6px}
+  .ladder th{font-size:13px;font-weight:600;color:var(--mute);text-align:left;padding:0 14px 2px}
+  .ladder td{padding:14px;background:var(--night-2);vertical-align:middle;white-space:nowrap}
+  .ladder td:first-child{border-radius:var(--r-ctl) 0 0 var(--r-ctl);font-weight:600}
+  .ladder td:last-child{border-radius:0 var(--r-ctl) var(--r-ctl) 0;color:var(--mute);font-size:14px}
+  .ladder .price{font-size:26px;font-weight:800;line-height:1}
+  .ladder s{display:block;margin-top:3px;font-size:12px;color:var(--mute)}
+  .ladder tr.on td{background:var(--neon-soft);box-shadow:inset 0 1px 0 rgba(255,77,157,.5),inset 0 -1px 0 rgba(255,77,157,.5)}
+  .ladder tr.on td:first-child{box-shadow:inset 1px 1px 0 rgba(255,77,157,.5),inset 0 -1px 0 rgba(255,77,157,.5)}
+  .ladder tr.on td:last-child{box-shadow:inset -1px 1px 0 rgba(255,77,157,.5),inset 0 -1px 0 rgba(255,77,157,.5)}
+  .ladder tr.on .price{color:var(--neon)}
+  .here{display:inline-block;margin-left:6px;font-size:12px;font-weight:700;color:var(--neon)}
+  .worth{margin-top:18px;padding:16px 18px;border-radius:var(--r-surface);background:var(--night-2);font-size:15px}
+  .worth b{font-weight:700}
+  .rules{margin-top:14px;padding-left:18px;color:var(--mute);font-size:14px}
+  .rules li+li{margin-top:4px}
+
+  /* ===== 장소 ===== */
+  .gallery{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:220px 120px;gap:6px}
+  .gallery img{width:100%;height:100%;object-fit:cover;border-radius:var(--r-ctl);background:var(--night-2);display:block}
+  .gallery img:first-child{grid-column:1/-1}
+  .map{margin-top:20px;height:240px;border-radius:var(--r-surface);overflow:hidden;background:var(--night-2)}
+  .map iframe{width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(180deg) saturate(.6)}
+
+  /* ===== 진행 순서 ===== */
+  .steps{list-style:none;margin-top:22px;display:grid;gap:0}
+  .steps li{display:grid;grid-template-columns:112px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+  .steps li:last-child{border-bottom:1px solid var(--line)}
+  .steps time{font-weight:700;font-size:15px}
+  .steps li.day time{color:var(--neon)}
+  .steps p{color:var(--mute);font-size:15px}
+  .caution{margin-top:16px;padding:14px 16px;border-radius:var(--r-surface);background:rgba(255,184,107,.08);color:#ffd9ad;font-size:14px}
+
+  /* ===== 신청 폼 ===== */
+  .apply{margin-top:22px;padding:24px 20px;border-radius:var(--r-surface);background:var(--night-2)}
+  form{display:grid;gap:22px}
+  .field{display:grid;gap:8px}
+  .field>label,legend{font-size:15px;font-weight:700}
+  .field small,legend small{font-weight:400;color:var(--mute);font-size:13px;margin-left:4px}
+  fieldset{border:0;display:grid;gap:8px}
+  input[type=text],textarea{width:100%;min-height:50px;padding:13px 14px;border:1px solid var(--line-2);border-radius:var(--r-ctl);background:var(--night);color:var(--ink);font:inherit;font-size:16px;transition:border-color .2s}
+  input::placeholder,textarea::placeholder{color:#8a839a}
+  input[type=text]:focus,textarea:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px var(--neon-soft)}
+  textarea{resize:vertical;min-height:76px}
+  .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .opts input{position:absolute;opacity:0;pointer-events:none}
+  .opts label{min-height:52px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 6px;border:1px solid var(--line-2);border-radius:var(--r-ctl);
+    background:var(--night);font-size:14px;font-weight:600;line-height:1.3;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+  .opts label:hover{border-color:#6b6180}
+  .opts input:checked+label{border-color:var(--neon);background:var(--neon-soft);color:#fff}
+  .opts input:focus-visible+label{outline:2px solid var(--neon);outline-offset:2px}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--mute);cursor:pointer}
+  .agree input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--neon)}
+  .agree b{color:var(--ink)}
+  #submitBtn{width:100%}
+  .msg{font-size:15px;padding:14px 16px;border-radius:var(--r-ctl);display:none}
+  .msg.ok{display:block;background:var(--neon-soft);border:1px solid rgba(255,77,157,.45)}
+  .msg.err{display:block;background:rgba(255,184,107,.1);border:1px solid rgba(255,184,107,.45);color:#ffd9ad}
+  .banner{font-size:13px;color:#ffd9ad;background:rgba(255,184,107,.08);border:1px solid rgba(255,184,107,.3);padding:10px 12px;border-radius:var(--r-ctl);margin-bottom:18px;display:none}
+
+  /* ===== 신청 현황 ===== */
+  .tally{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:14px;color:var(--mute)}
+  .tally b{color:var(--ink)}
+  .roster{list-style:none;margin-top:16px;border-top:1px solid var(--line)}
+  .roster li{display:grid;grid-template-columns:28px 1fr auto;gap:4px 12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
+  .roster .no{font-size:18px;color:var(--mute);line-height:1.4}
+  .roster .who b{font-size:16px}
+  .roster .ans{display:block;font-size:13px;color:var(--mute);margin-top:2px}
+  .roster .cmt{display:block;font-size:14px;margin-top:6px;color:#d9d2e3}
+  .roster li.mine .no{color:var(--neon)}
+  .me{display:inline-block;margin-left:8px;font-size:12px;font-weight:700;color:var(--neon)}
+  .x{min-height:40px;padding:0 12px;border:1px solid var(--line-2);border-radius:var(--r-ctl);background:transparent;color:var(--mute);font:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s,background .2s}
+  .x:hover{color:var(--ink);border-color:var(--ink)}
+  .x.armed{color:var(--neon-ink);background:var(--warn);border-color:var(--warn)}
+  .x:disabled{opacity:.5;cursor:wait}
+  .empty{padding:28px 0;text-align:center;color:var(--mute);border-bottom:1px solid var(--line)}
+  .skel{height:52px;margin:10px 0;border-radius:var(--r-ctl);background:linear-gradient(90deg,var(--night-2),var(--night-3),var(--night-2));background-size:200% 100%}
+  @media (prefers-reduced-motion:no-preference){.skel{animation:shimmer 1.4s linear infinite}@keyframes shimmer{to{background-position:-200% 0}}}
+  .listmsg{margin-top:12px;font-size:14px;color:var(--neon);min-height:1em}
+
+  footer{margin-top:64px;padding:28px 0 12px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+
+  /* ===== 하단 고정 신청 바 ===== */
+  .dock{position:fixed;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom));z-index:20;width:min(696px,calc(100% - 24px));margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 18px;border-radius:var(--r-surface);
+    background:rgba(28,24,36,.94);border:1px solid var(--line-2);box-shadow:0 12px 40px -8px rgba(0,0,0,.6);
+    transition:transform .4s var(--ease),opacity .3s}
+  @supports (backdrop-filter:blur(1px)){.dock{background:rgba(28,24,36,.8);backdrop-filter:blur(14px) saturate(140%)}}
+  .dock.hide{transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none}
+  .dock p{font-size:14px;line-height:1.35;color:var(--mute)}
+  .dock p b{color:var(--ink);font-size:15px}
+  .dock .btn-primary{min-height:46px;padding:0 18px;font-size:15px}
+
+  @media (max-width:520px){
+    .facts{grid-template-columns:repeat(3,1fr);gap:8px 12px}
+    .facts dd{font-size:28px}
+    .opts label{font-size:13px;padding:8px 4px}
+    .steps li{grid-template-columns:1fr;gap:2px}
+    .gallery{grid-template-rows:200px 96px}
+    .ladder td{padding:12px 10px}
+    .ladder th{padding:0 10px 2px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <img class="hero-bg" src="assets/room-mirror.jpg" alt="" fetchpriority="high">
+  <div class="hero-in">
+    <h1>
+      <span class="sign" aria-label="NEON">NEON</span>
+      <span class="h1-sub">A2O LITE 1절 하이라이트,<br>유림쌤과 80분 원데이 클래스</span>
+    </h1>
+    <p class="when">
+      <span>11월 14일 (토) 20:20</span>
+      <span>사당역 7번 출구 2분</span>
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#apply">참가 신청하기</a>
+      <a class="btn" href="#list" id="heroCount">신청 현황 보기</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="notice" id="notice" hidden></div>
+
+  <section class="status" aria-labelledby="statusTitle">
+    <h2 id="statusTitle">6명이 모이면 열려요</h2>
+    <div class="seats" id="seats" aria-hidden="true"></div>
+    <dl class="facts" aria-live="polite">
+      <div><dt>지금 신청</dt><dd class="num" id="sCount">0<small>명</small></dd></div>
+      <div><dt>지금 기준 1인</dt><dd class="num hot" id="sPrice">-</dd></div>
+      <div><dt>신청 마감</dt><dd class="num" id="sDday">-</dd></div>
+    </dl>
+    <p class="note" id="sGoal">최소 6명이 모이면 개강 확정이에요.</p>
+  </section>
+
+  <section aria-labelledby="infoTitle">
+    <h2 id="infoTitle">클래스 안내</h2>
+    <dl class="info">
+      <dt>일시</dt><dd><b>2026년 11월 14일 (토) 20:20 ~ 21:40</b><br><span>초보도 따라올 수 있게 80분으로 넉넉하게 진행해요</span></dd>
+      <dt>곡</dt><dd>A2O LITE - NEON, 1절 하이라이트</dd>
+      <dt>강사</dt><dd>유림쌤 (YURIM MOVES) <a href="https://www.instagram.com/yurim_moves/" target="_blank" rel="noopener">@yurim_moves</a></dd>
+      <dt>장소</dt><dd>사당역2분 빈티지 대형연습실<br><span>서울 동작구 남부순환로 2073 2층</span></dd>
+      <dt>인원</dt><dd>최소 6명, 쾌적하게는 14명까지 추천</dd>
+      <dt>뒷풀이</dt><dd>수업 끝나고 사당 먹자골목에서 식사 (자유 참여)</dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="videoTitle">
+    <h2 id="videoTitle">이 부분을 배워요</h2>
+    <p class="lead">1절 하이라이트(후렴) 구간이에요. 확정 인원이 <b>짝수</b>면 인트로 페어 버전도 해볼 수 있어서, 신청할 때 의향을 받아요.</p>
+    <div class="video">
+      <iframe id="yt" src="https://www.youtube.com/embed/xaiNQDAx7Ag?start=44&end=88&rel=0&playsinline=1"
+        title="A2O LITE - NEON 1절 하이라이트" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="btnrow">
+      <button class="btn" type="button" onclick="replay()">하이라이트 다시 보기</button>
+      <a class="btn" href="https://www.youtube.com/watch?v=xaiNQDAx7Ag&t=44s" target="_blank" rel="noopener">유튜브에서 보기</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=D968qfUZMUE&t=42s" target="_blank" rel="noopener">공식 MV</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="priceTitle">
+    <h2 id="priceTitle">많이 모일수록 1인 참가비가 내려가요</h2>
+    <p class="next" id="nextTier"></p>
+    <table class="ladder">
+      <thead><tr><th scope="col">확정 인원</th><th scope="col">1인 참가비</th><th scope="col">6명일 때보다</th></tr></thead>
+      <tbody id="priceRows"></tbody>
+    </table>
+    <p class="worth">참가비에는 <b>강사 초청비와 연습실 대관비</b>가 모두 포함돼 있어서 조금 비싸게 느껴질 수 있지만, 원데이 댄스 클래스 <b>평균 수준의 레슨비</b>예요.</p>
+    <ul class="rules">
+      <li>원래 80분 수업 가격보다 1인 5,000원 저렴한 특별가예요.</li>
+      <li>1인 참가비는 <b>최종 확정 인원</b> 기준으로 정해져요. 친구 데려올수록 다 같이 이득이에요.</li>
+      <li>쾌적하게는 14명까지 추천하고, 조금 북적여도 괜찮으면 그 이상도 가능해요.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="placeTitle">
+    <h2 id="placeTitle">사당역 2분, 대형 연습실</h2>
+    <p class="lead">스우파에도 나왔고 아이돌 촬영도 자주 하는 연습실이에요. 10.2m × 9m 홀에 전면 거울이 있어요.</p>
+    <div class="gallery">
+      <img src="assets/room-main.jpg" alt="창가 쪽에서 본 연습실 전경" loading="lazy">
+      <img src="assets/room-inside.jpg" alt="연습실 내부 측면" loading="lazy">
+      <img src="assets/room-side.jpg" alt="측면 창가" loading="lazy">
+      <img src="assets/room-dressing.jpg" alt="탈의실과 메이크업 공간" loading="lazy">
+    </div>
+    <dl class="info">
+      <dt>주소</dt><dd>서울 동작구 남부순환로 2073 2층<br><span>지번: 사당동 1044-24 진영빌딩 2층</span></dd>
+      <dt>가는 길</dt><dd>사당역 <b>7번 출구</b>에서 도보 2분<br><span>엘리베이터가 없어서 계단으로 올라가요</span></dd>
+      <dt>시설</dt><dd>전면 거울, 탈의실, 실내 화장실, 정수기, 냉난방</dd>
+    </dl>
+    <div class="map">
+      <iframe src="https://maps.google.com/maps?q=37.477003,126.979293&z=17&output=embed" title="연습실 위치 지도" loading="lazy"></iframe>
+    </div>
+    <div class="btnrow">
+      <a class="btn" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%8F%99%EC%9E%91%EA%B5%AC%20%EB%82%A8%EB%B6%80%EC%88%9C%ED%99%98%EB%A1%9C%202073" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn" href="https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8%20%EB%8F%99%EC%9E%91%EA%B5%AC%20%EB%82%A8%EB%B6%80%EC%88%9C%ED%99%98%EB%A1%9C%202073" target="_blank" rel="noopener">카카오맵</a>
+      <a class="btn" href="https://www.spacecloud.kr/space/52842" target="_blank" rel="noopener">연습실 사진 더 보기</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="stepTitle">
+    <h2 id="stepTitle">진행 순서</h2>
+    <ol class="steps">
+      <li><time>~ 11/6 (금)</time><p>이 페이지에서 참가 신청. 마감 전까지는 신청한 기기에서 언제든 취소할 수 있어요.</p></li>
+      <li><time>11/6 (금)</time><p>6명 이상이면 개강 확정, 이 페이지에 입금 안내를 올려요. 6명 미만이면 아쉽지만 폐강이고 비용은 없어요.</p></li>
+      <li><time>11/7 ~ 11/13</time><p>확정 인원이 짝수면 인트로 페어 버전 의견을 모아요.</p></li>
+      <li class="day"><time>11/14 (토) 20:20</time><p>NEON 수업 시작 (80분). 옷을 갈아입으려면 10분 일찍 와 주세요.</p></li>
+      <li><time>21:40 ~</time><p>사당 먹자골목으로 이동해서 같이 식사해요.</p></li>
+    </ol>
+    <p class="caution">11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어려워요. 신중하게 신청해 주세요.</p>
+  </section>
+
+  <section id="apply" aria-labelledby="applyTitle">
+    <h2 id="applyTitle">참가 신청</h2>
+    <p class="lead">30초면 끝나요. 신청한 내용은 아래 신청 현황에 바로 올라가요.</p>
+    <div class="apply">
+      <div class="banner" id="modeBanner"></div>
+      <form id="form" autocomplete="off" novalidate>
+        <div class="field">
+          <label for="fName">이름 또는 닉네임</label>
+          <input type="text" id="fName" name="name" maxlength="20" required placeholder="예) 준호">
+        </div>
+        <fieldset>
+          <legend>댄스 경험</legend>
+          <div class="opts">
+            <input type="radio" id="lv1" name="level" value="처음이에요" required><label for="lv1">처음이에요</label>
+            <input type="radio" id="lv2" name="level" value="조금 해봤어요"><label for="lv2">조금 해봤어요</label>
+            <input type="radio" id="lv3" name="level" value="자신 있어요"><label for="lv3">자신 있어요</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>수업 후 사당 먹자골목 식사</legend>
+          <div class="opts">
+            <input type="radio" id="m1" name="meal" value="참석" required><label for="m1">같이 먹을래요</label>
+            <input type="radio" id="m2" name="meal" value="미정"><label for="m2">아직 몰라요</label>
+            <input type="radio" id="m3" name="meal" value="불참"><label for="m3">수업만 할게요</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>짝수 인원이면 인트로 페어 버전도 해볼까요?</legend>
+          <div class="opts">
+            <input type="radio" id="p1" name="pair" value="좋아요" required><label for="p1">좋아요</label>
+            <input type="radio" id="p2" name="pair" value="상관없음"><label for="p2">상관없어요</label>
+            <input type="radio" id="p3" name="pair" value="하이라이트만"><label for="p3">하이라이트만 할래요</label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="fMemo">한마디 <small>선택. 같이 오는 친구, 궁금한 점</small></label>
+          <textarea id="fMemo" name="memo" rows="2" maxlength="120" placeholder="예) 친구 1명이랑 따로 신청해요"></textarea>
+        </div>
+        <label class="agree"><input type="checkbox" name="agree" required>
+          <span>11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어렵다는 점을 확인했어요. 신청 내역(이름과 답변)은 이 페이지를 보는 모든 사람에게 <b>공개</b>돼요.</span></label>
+        <button class="btn-primary" id="submitBtn" type="submit">NEON 클래스 참가 신청</button>
+        <div class="msg" id="formMsg" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="list" aria-labelledby="listTitle">
+    <h2 id="listTitle">신청 현황 <span class="num" id="listCount" style="color:var(--neon)"></span></h2>
+    <div class="tally" id="summary"></div>
+    <ul class="roster" id="roster"><li class="skel" aria-label="불러오는 중"></li><li class="skel" aria-hidden="true"></li></ul>
+    <p class="listmsg" id="listMsg" role="status"></p>
+    <div class="btnrow">
+      <button class="btn" type="button" onclick="load()">새로고침</button>
+      <button class="btn" type="button" onclick="copyList()">명단 복사 (주최자용)</button>
+    </div>
+  </section>
+
+  <footer>
+    문의는 인스타그램 DM <a href="https://www.instagram.com/rorarion/" target="_blank" rel="noopener">@rorarion</a> 으로 주세요.<br>
+    NEON 원데이 클래스, 2026년 11월 14일 사당
+  </footer>
+</main>
+
+<div class="dock hide" id="dock" aria-hidden="true">
+  <p><b id="dockCount">0명 신청</b><br>지금 기준 1인 <span id="dockPrice">-</span></p>
+  <a class="btn-primary" href="#apply" tabindex="-1">참가 신청</a>
+</div>
+
+<script>
+/* ===== 설정 ===== */
+const MIN_PEOPLE = 6;
+const DEADLINE = new Date('2026-11-06T23:59:59+09:00');
+const TIERS = [
+  {min:6,  max:9,   price:40000, was:45000},
+  {min:10, max:14,  price:35000, was:40000},
+  {min:15, max:19,  price:30000, was:35000},
+  {min:20, max:999, price:25000, was:30000},
+];
+const PREFIX = 'neon1114:';
+// Google Apps Script 웹앱 URL (apps-script/Code.gs 배포 후 받은 .../exec 주소)
+const API_URL = '';
+// 개강 확정·입금 안내 등 공지. 비워 두면 숨김. (HTML 사용 가능)
+const NOTICE = '';
+
+/* ===== 저장소: 구글 시트(API_URL) → Claude 아티팩트 공유 저장소(window.storage) → 이 브라우저(localStorage) ===== */
+const gas = !!API_URL;
+let shared = gas || typeof window.storage?.get === 'function';
+const LS_KEY = 'neon1114_signups';
+const lsAll = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; } };
+const userErr = m => Object.assign(new Error(m), { user: true });
+
+// 이 기기에서 한 신청: { [id]: 취소 열쇠 }. 열쇠를 가진 기기만 취소할 수 있다.
+const MINE_KEY = 'neon1114_mine';
+const mine = () => { try { return JSON.parse(localStorage.getItem(MINE_KEY) || '{}'); } catch { return {}; } };
+const saveMine = m => { try { localStorage.setItem(MINE_KEY, JSON.stringify(m)); } catch {} };
+const newToken = () => [...crypto.getRandomValues(new Uint8Array(18))].map(x => x.toString(16).padStart(2, '0')).join('');
+
+async function gasCall(body){
+  const res = body ? await fetch(API_URL, { method: 'POST', body: JSON.stringify(body) })
+                   : await fetch(API_URL + '?action=list', { cache: 'no-store' });
+  const j = await res.json();
+  if (!j.ok) throw userErr(j.error || '서버 오류');
+  return j;
+}
+
+async function stList(){
+  if (gas) return (await gasCall()).list;
+  if (shared){
+    try{
+      const r = await window.storage.list(PREFIX, true);
+      const keys = (r?.keys || r || []).map(k => typeof k === 'string' ? k : k.key);
+      const vals = await Promise.all(keys.map(async k => {
+        try{ const v = await window.storage.get(k, true); const raw = typeof v === 'string' ? v : v?.value; return raw ? JSON.parse(raw) : null; }
+        catch{ return null; }
+      }));
+      return vals.filter(Boolean);
+    }catch(e){ console.warn('shared storage unavailable', e); shared = false; showMode(); }
+  }
+  return Object.values(lsAll());
+}
+// 신청 저장 후 id 반환. 구글 시트 모드에서는 서버가 id를 만들고 열쇠를 해시해 보관한다.
+async function stAdd(rec, token){
+  if (gas) return (await gasCall({ action: 'add', rec, token })).id;
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const obj = { ...rec, id, tok: await sha(id + token) };
+  if (shared){ await window.storage.set(PREFIX + id, JSON.stringify(obj), true); return id; }
+  const all = lsAll(); all[PREFIX + id] = obj; localStorage.setItem(LS_KEY, JSON.stringify(all));
+  return id;
+}
+async function stDel(rec, token){
+  if (gas){ await gasCall({ action: 'cancel', id: rec.id, token }); return; }
+  if ((await sha(rec.id + token)) !== rec.tok) throw userErr('신청한 기기에서만 취소할 수 있어요.');
+  if (shared){ await window.storage.delete(PREFIX + rec.id, true); return; }
+  const all = lsAll(); delete all[PREFIX + rec.id]; localStorage.setItem(LS_KEY, JSON.stringify(all));
+}
+function showMode(){
+  const b = document.getElementById('modeBanner');
+  if (!shared){ b.style.display = 'block'; b.textContent = '미리보기 모드: 신청 내역이 이 브라우저에만 저장돼요. (공유 저장소 미연결)'; }
+  else b.style.display = 'none';
+}
+
+/* ===== 유틸 ===== */
+const won = n => n.toLocaleString('ko-KR') + '원';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tierOf = n => TIERS.find(t => n >= t.min && n <= t.max);
+const range = x => x.max > 100 ? x.min + '명 이상' : x.min + '~' + x.max + '명';
+async function sha(s){
+  try{ const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+  catch{ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))|0; return 'h'+h; }
+}
+const closed = () => Date.now() > DEADLINE.getTime();
+const $ = id => document.getElementById(id);
+
+let LIST = [];
+
+/* ===== 렌더 ===== */
+function renderStatus(){
+  const n = LIST.length;
+  const t = tierOf(Math.max(n, MIN_PEOPLE));
+  const ms = DEADLINE - Date.now();
+  const dday = ms <= 0 ? '마감' : (ms < 864e5 ? 'D-DAY' : 'D-' + Math.ceil(ms / 864e5));
+
+  const slots = Math.max(MIN_PEOPLE, Math.min(n, 30));
+  $('seats').innerHTML = Array.from({ length: slots }, (_, i) =>
+    `<span class="seat${i < n ? ' on' : ''}${i >= MIN_PEOPLE ? ' extra' : ''}"></span>`).join('');
+  $('sCount').innerHTML = `${n}<small>명</small>`;
+  $('sPrice').textContent = won(t.price);
+  $('sDday').textContent = dday;
+  $('statusTitle').textContent = n >= MIN_PEOPLE ? '개강 인원이 모였어요' : '6명이 모이면 열려요';
+  $('sGoal').innerHTML = n >= MIN_PEOPLE
+    ? `최소 인원을 넘었어요. 더 모일수록 1인 참가비가 내려가요.`
+    : `<b>${MIN_PEOPLE - n}명</b>만 더 모이면 개강 확정이에요.`;
+  $('heroCount').textContent = `지금 ${n}명 신청`;
+  $('dockCount').textContent = `${n}명 신청, ${dday}`;
+  $('dockPrice').textContent = won(t.price);
+
+  $('priceRows').innerHTML = TIERS.map(x => `
+    <tr class="${x === t ? 'on' : ''}">
+      <td>${range(x)}${x === t ? '<span class="here">지금</span>' : ''}</td>
+      <td><span class="num price">${won(x.price)}</span><s>원래 ${won(x.was)}</s></td>
+      <td>${x.price === TIERS[0].price ? '기준' : won(TIERS[0].price - x.price) + ' 절약'}</td>
+    </tr>`).join('');
+  const next = TIERS.find(x => x.min > Math.max(n, MIN_PEOPLE - 1) && x.price < t.price);
+  $('nextTier').innerHTML = n < MIN_PEOPLE
+    ? `지금 ${n}명이에요. 6명이 모이면 1인 <b>${won(TIERS[0].price)}</b>부터 시작해요.`
+    : next ? `<b>${next.min - n}명</b>만 더 모이면 1인 <b>${won(next.price)}</b>으로 내려가요. 지금보다 ${won(t.price - next.price)} 저렴해요.`
+           : `최저가 구간이에요. 1인 <b>${won(t.price)}</b>.`;
+}
+
+function renderList(){
+  const my = mine();
+  const n = LIST.length;
+  $('listCount').textContent = n ? n + '명' : '';
+  if (!n){
+    $('roster').innerHTML = '<li class="empty">아직 신청자가 없어요. 첫 번째 자리를 채워 주세요.</li>';
+    $('summary').innerHTML = '';
+    return;
+  }
+  $('roster').innerHTML = LIST.map((r, i) => {
+    const isMine = !!my[r.id];
+    return `<li class="${isMine ? 'mine' : ''}">
+      <span class="num no">${i + 1}</span>
+      <div class="who"><b>${esc(r.name)}</b>${isMine ? '<span class="me">내 신청</span>' : ''}
+        <span class="ans">${esc(r.level)}, 식사 ${esc(r.meal)}, 페어 ${esc(r.pair)}</span>
+        ${r.memo ? `<span class="cmt">${esc(r.memo)}</span>` : ''}</div>
+      ${isMine && !closed() ? `<button class="x" type="button" data-cancel="${esc(r.id)}">신청 취소</button>` : '<span></span>'}
+    </li>`;
+  }).join('');
+  const c = (k, v) => LIST.filter(r => r[k] === v).length;
+  $('summary').innerHTML = `
+    <span>식사 참석 <b>${c('meal','참석')}</b>, 미정 <b>${c('meal','미정')}</b></span>
+    <span>페어 좋아요 <b>${c('pair','좋아요')}</b>, 상관없음 <b>${c('pair','상관없음')}</b>, 하이라이트만 <b>${c('pair','하이라이트만')}</b></span>
+    <span>${n % 2 === 0 ? '지금 짝수 인원이에요' : '지금 홀수 인원이에요'}</span>`;
+}
+
+async function load(){
+  const b = $('modeBanner');
+  try{
+    LIST = (await stList()).sort((a, b) => a.ts - b.ts);
+    if (b.dataset.err){ delete b.dataset.err; showMode(); }
+  }catch(err){
+    console.warn('list load failed', err);
+    b.dataset.err = 1; b.style.display = 'block'; b.textContent = '명단을 불러오지 못했어요. 잠시 후 새로고침해 주세요.';
+    if (!LIST.length) $('roster').innerHTML = '<li class="empty">명단을 불러오지 못했어요. 새로고침을 눌러 주세요.</li>';
+    return;
+  }
+  // 주최자가 시트에서 지운 신청은 이 기기 목록에서도 정리
+  const my = mine(), ids = new Set(LIST.map(r => r.id));
+  if (Object.keys(my).some(id => !ids.has(id))) saveMine(Object.fromEntries(Object.entries(my).filter(([id]) => ids.has(id))));
+  renderStatus(); renderList();
+}
+
+/* ===== 신청 ===== */
+const form = $('form');
+const msg = (t, ok) => { const m = $('formMsg'); m.className = 'msg ' + (ok ? 'ok' : 'err'); m.innerHTML = t; };
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (closed()){ msg('신청이 마감됐어요. 추가 참여는 @rorarion 으로 DM 주세요.'); return; }
+  const fd = new FormData(form);
+  const name = (fd.get('name') || '').trim();
+  if (!name){ msg('이름 또는 닉네임을 적어 주세요.'); $('fName').focus(); return; }
+  for (const [k, label] of [['level','댄스 경험'], ['meal','식사 참석 여부'], ['pair','페어 버전 의향']]){
+    if (!fd.get(k)){ msg(`${label}을(를) 골라 주세요.`); form.querySelector(`[name=${k}]`).focus(); return; }
+  }
+  if (!fd.get('agree')){ msg('안내 사항 확인에 체크해 주세요.'); form.agree.focus(); return; }
+  const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '신청하는 중...';
+  try{
+    await load();
+    if (LIST.some(r => r.name.trim().toLowerCase() === name.toLowerCase()))
+      throw userErr('같은 이름으로 이미 신청돼 있어요. 다른 분이라면 성이나 이니셜을 붙여 주세요.');
+    const token = newToken();
+    const id = await stAdd({ name, level: fd.get('level'), meal: fd.get('meal'), pair: fd.get('pair'),
+                             memo: (fd.get('memo') || '').trim(), ts: Date.now() }, token);
+    saveMine({ ...mine(), [id]: token });
+    form.reset();
+    await load();
+    msg(`<b>${esc(name)}</b>님 신청 완료! ${LIST.length}번째 자리예요. 11/6에 개강 여부와 입금 안내를 이 페이지에 올려 둘게요.`, true);
+  }catch(err){
+    msg(err.user ? esc(err.message) : '저장 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요. (' + esc(err.message || err) + ')');
+  }finally{ btn.disabled = closed(); btn.textContent = 'NEON 클래스 참가 신청'; }
+});
+
+/* ===== 취소: 신청한 기기에서 버튼 두 번(확인)으로 ===== */
+$('roster').addEventListener('click', async e => {
+  const btn = e.target.closest('[data-cancel]'); if (!btn) return;
+  const id = btn.dataset.cancel, r = LIST.find(x => x.id === id), token = mine()[id];
+  if (!r || !token) return;
+  if (!btn.classList.contains('armed')){
+    btn.classList.add('armed'); btn.textContent = '정말 취소할까요?';
+    setTimeout(() => { if (btn.isConnected && !btn.disabled){ btn.classList.remove('armed'); btn.textContent = '신청 취소'; } }, 4000);
+    return;
+  }
+  btn.disabled = true; btn.textContent = '취소하는 중...';
+  try{
+    await stDel(r, token);
+    const m = mine(); delete m[id]; saveMine(m);
+    await load();
+    $('listMsg').textContent = `${r.name}님 신청을 취소했어요.`;
+  }catch(err){
+    $('listMsg').textContent = err.user ? err.message : '취소하지 못했어요. 잠시 후 다시 시도해 주세요.';
+    btn.disabled = false; btn.classList.remove('armed'); btn.textContent = '신청 취소';
+  }
+});
+
+/* ===== 명단 복사 ===== */
+function copyList(){
+  const t = tierOf(Math.max(LIST.length, MIN_PEOPLE));
+  const lines = LIST.map((r, i) => `${i + 1}. ${r.name} / ${r.level} / 식사 ${r.meal} / 페어 ${r.pair}${r.memo ? ' / ' + r.memo : ''}`);
+  const text = `[NEON 11/14 신청 명단] 총 ${LIST.length}명, 1인 ${won(t.price)}\n` + lines.join('\n');
+  (navigator.clipboard?.writeText(text) || Promise.reject()).then(() => { $('listMsg').textContent = '명단을 복사했어요.'; }).catch(() => prompt('아래 내용을 복사하세요', text));
+}
+
+/* ===== 하단 신청 바: 첫 화면과 신청 폼이 보일 때는 숨김 ===== */
+const dock = $('dock'), seen = new Map();
+const io = new IntersectionObserver(es => {
+  es.forEach(x => seen.set(x.target, x.isIntersecting));
+  dock.classList.toggle('hide', closed() || [...seen.values()].some(Boolean));
+}, { threshold: 0 });
+[$('top'), $('apply'), $('list')].forEach(el => io.observe(el));
+
+/* ===== 기타 ===== */
+function replay(){ const f = $('yt'); const s = f.src; f.src = ''; f.src = s.replace(/&autoplay=1/, '') + '&autoplay=1'; }
+document.querySelectorAll('.gallery img').forEach(img => img.addEventListener('error', () => { img.style.visibility = 'hidden'; }));
+if (NOTICE){ $('notice').innerHTML = NOTICE; $('notice').hidden = false; }
+if (closed()){ $('submitBtn').disabled = true; $('submitBtn').textContent = '신청 마감 (문의 @rorarion)'; }
+
+showMode();
+load();
+setInterval(load, 20000);
+</script>
+</body>
+</html>

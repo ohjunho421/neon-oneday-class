@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-03T15:08:05.635Z",
+        "reason": "assistant decision: the NEON wordmark is a literal neon sign (song title NEON), the only remaining glow; other glows removed"
+      }
+    ]
+  }
+}
