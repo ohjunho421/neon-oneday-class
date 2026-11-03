@@ -175,6 +175,7 @@
   .tally{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:14px;color:var(--mute)}
   .tally b{color:var(--ink)}
   .roster{list-style:none;margin-top:16px;border-top:1px solid var(--line)}
+  .roster:empty{border-top:0}
   .roster li{display:grid;grid-template-columns:28px 1fr auto;gap:4px 12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
   .roster .no{font-size:18px;color:var(--mute);line-height:1.4}
   .roster .who b{font-size:16px}
@@ -266,12 +267,12 @@
     <h2 id="videoTitle">이 부분을 배워요</h2>
     <p class="lead">1절 하이라이트(후렴) 구간이에요. 확정 인원이 <b>짝수</b>면 인트로 페어 버전도 해볼 수 있어서, 신청할 때 의향을 받아요.</p>
     <div class="video">
-      <iframe id="yt" src="https://www.youtube.com/embed/xaiNQDAx7Ag?start=44&end=88&rel=0&playsinline=1"
-        title="A2O LITE - NEON 1절 하이라이트" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="yt" src="https://www.youtube.com/embed/xaiNQDAx7Ag?start=60&end=104&rel=0&playsinline=1"
+        title="A2O LITE - NEON 1절 하이라이트" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="btnrow">
       <button class="btn" type="button" onclick="replay()">하이라이트 다시 보기</button>
-      <a class="btn" href="https://www.youtube.com/watch?v=xaiNQDAx7Ag&t=44s" target="_blank" rel="noopener">유튜브에서 보기</a>
+      <a class="btn" href="https://www.youtube.com/watch?v=xaiNQDAx7Ag&t=60s" target="_blank" rel="noopener">유튜브에서 보기</a>
       <a class="btn" href="https://www.youtube.com/watch?v=D968qfUZMUE&t=42s" target="_blank" rel="noopener">공식 MV</a>
     </div>
   </section>
@@ -481,6 +482,12 @@ const closed = () => Date.now() > DEADLINE.getTime();
 const $ = id => document.getElementById(id);
 
 let LIST = [];
+// 저장소에서 온 레코드는 신뢰하지 않고 형식이 맞는 것만 쓴다
+const CHOICES = { level: ['처음이에요', '조금 해봤어요', '자신 있어요'], meal: ['참석', '미정', '불참'], pair: ['좋아요', '상관없음', '하이라이트만'] };
+const validRec = r => r && typeof r === 'object' && typeof r.id === 'string' && r.id.length <= 40
+  && typeof r.name === 'string' && r.name.trim() && r.name.length <= 40
+  && Object.keys(CHOICES).every(k => CHOICES[k].includes(r[k]))
+  && (r.memo == null || (typeof r.memo === 'string' && r.memo.length <= 200)) && Number.isFinite(Number(r.ts));
 
 /* ===== 렌더 ===== */
 function renderStatus(){
@@ -521,7 +528,7 @@ function renderList(){
   const n = LIST.length;
   $('listCount').textContent = n ? n + '명' : '';
   if (!n){
-    $('roster').innerHTML = '<li class="empty">아직 신청자가 없어요. 첫 번째 자리를 채워 주세요.</li>';
+    $('roster').innerHTML = '';
     $('summary').innerHTML = '';
     return;
   }
@@ -545,7 +552,7 @@ function renderList(){
 async function load(){
   const b = $('modeBanner');
   try{
-    LIST = (await stList()).sort((a, b) => a.ts - b.ts);
+    LIST = (await stList()).filter(validRec).sort((a, b) => a.ts - b.ts);
     if (b.dataset.err){ delete b.dataset.err; showMode(); }
   }catch(err){
     console.warn('list load failed', err);
@@ -576,7 +583,7 @@ form.addEventListener('submit', async e => {
   const btn = $('submitBtn'); btn.disabled = true; btn.textContent = '신청하는 중...';
   try{
     await load();
-    if (LIST.some(r => r.name.trim().toLowerCase() === name.toLowerCase()))
+    if (LIST.some(r => String(r.name ?? '').trim().toLowerCase() === name.toLowerCase()))
       throw userErr('같은 이름으로 이미 신청돼 있어요. 다른 분이라면 성이나 이니셜을 붙여 주세요.');
     const token = newToken();
     const id = await stAdd({ name, level: fd.get('level'), meal: fd.get('meal'), pair: fd.get('pair'),
