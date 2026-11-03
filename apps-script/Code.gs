@@ -1,13 +1,14 @@
 /**
  * NEON 11/14 원데이 클래스 신청 백엔드 (Google Apps Script 웹앱)
  * - 이 스크립트가 붙은 구글 시트의 'signups' 시트에 1행 1신청으로 저장한다.
- * - GET  ?action=list                    → 공개 명단 (취소 열쇠 해시 제외)
+ * - GET  ?action=list                    → 공개 명단 (휴대폰 번호·취소 열쇠 해시 제외)
  * - POST {action:'add', rec:{...}, token} → 신청. token은 신청한 기기가 만든 무작위 열쇠
  * - POST {action:'cancel', id, token}    → 본인 취소 (마감 전까지, 같은 기기에서만)
  * 배포: 배포 > 새 배포 > 웹 앱, 실행 사용자 '나', 액세스 '모든 사용자'
  */
 const SHEET = 'signups';
-const HEAD = ['id', 'name', 'level', 'meal', 'pair', 'memo', 'tokHash', 'ts'];
+// phone은 시트에만 남고 명단 응답(publicRec)에는 절대 포함하지 않는다
+const HEAD = ['id', 'name', 'level', 'meal', 'pair', 'memo', 'tokHash', 'ts', 'phone'];
 const DEADLINE = new Date('2026-11-06T23:59:59+09:00').getTime();
 const CHOICES = {
   level: ['처음이에요', '조금 해봤어요', '자신 있어요'],
@@ -39,13 +40,20 @@ function add(rec, token) {
   if (!/^[a-f0-9]{16,64}$/.test(token)) return { ok: false, error: '잘못된 요청이에요. 새로고침 후 다시 시도해 주세요.' };
   const name = clean(rec.name, 20);
   if (!name) return { ok: false, error: '이름을 입력해 주세요.' };
+  const phone = normPhone(rec.phone);
+  if (!phone) return { ok: false, error: '휴대폰 번호를 010-1234-5678 형식으로 적어 주세요.' };
   for (const k in CHOICES) if (CHOICES[k].indexOf(rec[k]) < 0) return { ok: false, error: '선택 항목을 다시 확인해 주세요.' };
-  if (readAll().some(r => String(r.name).trim().toLowerCase() === name.trim().toLowerCase())) {
+  const all = readAll();
+  if (all.some(r => String(r.name).trim().toLowerCase() === name.trim().toLowerCase())) {
     return { ok: false, error: '같은 이름으로 이미 신청돼 있어요. 다른 분이라면 성이나 이니셜을 붙여 주세요.' };
+  }
+  if (all.some(r => normPhone(r.phone) === phone)) {
+    return { ok: false, error: '이 번호로 이미 신청돼 있어요. 아래 명단을 확인해 주세요.' };
   }
   const id = Utilities.getUuid().replace(/-/g, '').slice(0, 12);
   const row = { id, name, level: rec.level, meal: rec.meal, pair: rec.pair,
-                memo: clean(rec.memo, 120), tokHash: hash(id + token), ts: Date.now() };
+                memo: clean(rec.memo, 120), tokHash: hash(id + token), ts: Date.now(),
+                phone: "'" + phone }; // 앞의 ' 는 시트가 숫자로 바꿔 0을 지우지 않게 하는 텍스트 표시
   sheet().appendRow(HEAD.map(h => row[h]));
   return { ok: true, id };
 }
@@ -70,6 +78,7 @@ function sheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sh = ss.getSheetByName(SHEET);
   if (!sh) { sh = ss.insertSheet(SHEET); sh.appendRow(HEAD); sh.setFrozenRows(1); }
+  else if (sh.getRange(1, HEAD.length).getValue() !== HEAD[HEAD.length - 1]) sh.getRange(1, 1, 1, HEAD.length).setValues([HEAD]);
   return sh;
 }
 
@@ -83,6 +92,13 @@ function readAll() {
 function publicRec(r) {
   return { id: String(r.id), name: String(r.name), level: r.level, meal: r.meal,
            pair: r.pair, memo: String(r.memo || ''), ts: Number(r.ts) };
+}
+
+// 01X로 시작하는 휴대폰 번호만 받아 010-1234-5678 형태로 맞춘다. 아니면 ''
+function normPhone(s) {
+  const d = String(s || '').replace(/\D/g, '');
+  if (!/^01[016789]\d{7,8}$/.test(d)) return '';
+  return d.length === 10 ? d.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') : d.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 }
 
 // 시트 수식 주입 방지(=, +, -, @로 시작하면 앞에 공백) + 길이 제한

@@ -151,9 +151,9 @@
   .field>label,legend{font-size:15px;font-weight:700}
   .field small,legend small{font-weight:400;color:var(--mute);font-size:13px;margin-left:4px}
   fieldset{border:0;display:grid;gap:8px}
-  input[type=text],textarea{width:100%;min-height:50px;padding:13px 14px;border:1px solid var(--line-2);border-radius:var(--r-ctl);background:var(--night);color:var(--ink);font:inherit;font-size:16px;transition:border-color .2s}
+  input[type=text],input[type=tel],textarea{width:100%;min-height:50px;padding:13px 14px;border:1px solid var(--line-2);border-radius:var(--r-ctl);background:var(--night);color:var(--ink);font:inherit;font-size:16px;transition:border-color .2s}
   input::placeholder,textarea::placeholder{color:#8a839a}
-  input[type=text]:focus,textarea:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px var(--neon-soft)}
+  input[type=text]:focus,input[type=tel]:focus,textarea:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px var(--neon-soft)}
   textarea{resize:vertical;min-height:76px}
   .opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
   .opts input{position:absolute;opacity:0;pointer-events:none}
@@ -320,7 +320,7 @@
     <h2 id="stepTitle">진행 순서</h2>
     <ol class="steps">
       <li><time>~ 11/6 (금)</time><p>이 페이지에서 참가 신청. 마감 전까지는 신청한 기기에서 언제든 취소할 수 있어요.</p></li>
-      <li><time>11/6 (금)</time><p>6명 이상이면 개강 확정, 이 페이지에 입금 안내를 올려요. 6명 미만이면 아쉽지만 폐강이고 비용은 없어요.</p></li>
+      <li><time>11/6 (금)</time><p>6명 이상이면 개강 확정, 적어 주신 번호로 카톡방에 초대하고 입금 안내를 드려요. 6명 미만이면 아쉽지만 폐강이고 비용은 없어요.</p></li>
       <li><time>11/7 ~ 11/13</time><p>확정 인원이 짝수면 인트로 페어 버전 의견을 모아요.</p></li>
       <li class="day"><time>11/14 (토) 20:20</time><p>NEON 수업 시작 (80분). 옷을 갈아입으려면 10분 일찍 와 주세요.</p></li>
       <li><time>21:40 ~</time><p>사당 먹자골목으로 이동해서 같이 식사해요.</p></li>
@@ -337,6 +337,10 @@
         <div class="field">
           <label for="fName">이름 또는 닉네임</label>
           <input type="text" id="fName" name="name" maxlength="20" required placeholder="예) 준호">
+        </div>
+        <div class="field">
+          <label for="fPhone">휴대폰 번호 <small>공개되지 않아요. 카톡방 초대에만 써요</small></label>
+          <input type="tel" id="fPhone" name="phone" inputmode="numeric" autocomplete="tel" maxlength="13" required placeholder="010-1234-5678">
         </div>
         <fieldset>
           <legend>댄스 경험</legend>
@@ -367,7 +371,7 @@
           <textarea id="fMemo" name="memo" rows="2" maxlength="120" placeholder="예) 친구 1명이랑 따로 신청해요"></textarea>
         </div>
         <label class="agree"><input type="checkbox" name="agree" required>
-          <span>11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어렵다는 점을 확인했어요. 신청 내역(이름과 답변)은 이 페이지를 보는 모든 사람에게 <b>공개</b>돼요.</span></label>
+          <span>11/6 개강 확정 후에는 연습실 대관 때문에 취소·환불이 어렵다는 점을 확인했어요. 신청 내역(이름과 답변)은 이 페이지를 보는 모든 사람에게 <b>공개</b>돼요. 휴대폰 번호는 공개되지 않고 카톡방 초대에만 쓰며, 수업이 끝나면 지워요.</span></label>
         <button class="btn-primary" id="submitBtn" type="submit">NEON 클래스 참가 신청</button>
         <div class="msg" id="formMsg" role="status"></div>
       </form>
@@ -449,10 +453,12 @@ async function stList(){
   return Object.values(lsAll());
 }
 // 신청 저장 후 id 반환. 구글 시트 모드에서는 서버가 id를 만들고 열쇠를 해시해 보관한다.
+// 휴대폰 번호는 서버(시트)에만 보낸다. 다른 저장소는 명단이 그대로 공개되므로 저장하지 않는다.
 async function stAdd(rec, token){
   if (gas) return (await gasCall({ action: 'add', rec, token })).id;
+  const { phone, ...pub } = rec;
   const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const obj = { ...rec, id, tok: await sha(id + token) };
+  const obj = { ...pub, id, tok: await sha(id + token) };
   if (shared){ await window.storage.set(PREFIX + id, JSON.stringify(obj), true); return id; }
   const all = lsAll(); all[PREFIX + id] = obj; localStorage.setItem(LS_KEY, JSON.stringify(all));
   return id;
@@ -479,6 +485,12 @@ async function sha(s){
   catch{ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))|0; return 'h'+h; }
 }
 const closed = () => Date.now() > DEADLINE.getTime();
+// 01X 휴대폰 번호만 받아 010-1234-5678 형태로. 아니면 '' (서버도 같은 규칙으로 다시 검사)
+function normPhone(s){
+  const d = String(s || '').replace(/\D/g, '');
+  if (!/^01[016789]\d{7,8}$/.test(d)) return '';
+  return d.length === 10 ? d.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3') : d.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+}
 const $ = id => document.getElementById(id);
 
 let LIST = [];
@@ -576,6 +588,8 @@ form.addEventListener('submit', async e => {
   const fd = new FormData(form);
   const name = (fd.get('name') || '').trim();
   if (!name){ msg('이름 또는 닉네임을 적어 주세요.'); $('fName').focus(); return; }
+  const phone = normPhone(fd.get('phone'));
+  if (!phone){ msg('휴대폰 번호를 010-1234-5678 형식으로 적어 주세요.'); $('fPhone').focus(); return; }
   for (const [k, label] of [['level','댄스 경험'], ['meal','식사 참석 여부'], ['pair','페어 버전 의향']]){
     if (!fd.get(k)){ msg(`${label}을(를) 골라 주세요.`); form.querySelector(`[name=${k}]`).focus(); return; }
   }
@@ -586,12 +600,12 @@ form.addEventListener('submit', async e => {
     if (LIST.some(r => String(r.name ?? '').trim().toLowerCase() === name.toLowerCase()))
       throw userErr('같은 이름으로 이미 신청돼 있어요. 다른 분이라면 성이나 이니셜을 붙여 주세요.');
     const token = newToken();
-    const id = await stAdd({ name, level: fd.get('level'), meal: fd.get('meal'), pair: fd.get('pair'),
+    const id = await stAdd({ name, phone, level: fd.get('level'), meal: fd.get('meal'), pair: fd.get('pair'),
                              memo: (fd.get('memo') || '').trim(), ts: Date.now() }, token);
     saveMine({ ...mine(), [id]: token });
     form.reset();
     await load();
-    msg(`<b>${esc(name)}</b>님 신청 완료! ${LIST.length}번째 자리예요. 11/6에 개강 여부와 입금 안내를 이 페이지에 올려 둘게요.`, true);
+    msg(`<b>${esc(name)}</b>님 신청 완료! ${LIST.length}번째 자리예요. 11/6에 개강이 확정되면 적어 주신 번호로 카톡방에 초대할게요.`, true);
   }catch(err){
     msg(err.user ? esc(err.message) : '저장 중 문제가 생겼어요. 잠시 후 다시 시도해 주세요. (' + esc(err.message || err) + ')');
   }finally{ btn.disabled = closed(); btn.textContent = 'NEON 클래스 참가 신청'; }
